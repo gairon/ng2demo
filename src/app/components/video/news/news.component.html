@@ -1,0 +1,7 @@
+<div class="news">
+  <img class="news__image" [src]="news.imageUrl" />
+  <h1 class="news__title-ru">{{ news.titleRu }}</h1>
+  <h2 class="news__title-en">{{ news.titleEn }}</h2>
+  <div *ngIf="news.season">Сезон: {{ news.season }}</div>
+  <div *ngIf="news.additional" class="news__additional">{{ news.additional }}</div>
+</div>
