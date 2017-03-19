@@ -1,0 +1,53 @@
+:host {
+    display: block;
+    cursor: pointer;
+    margin: 5px;
+    border: 1px solid #CCC;
+    padding: 5px;
+}
+
+:host(:after) {
+    content: " "; /* Older browser do not support empty content */
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+}
+
+/* One of possible ways to react on hover event */
+/*:host(:hover .news) {*/
+/*background-color: #e5edff;*/
+/*}*/
+
+:host(.news_hovered) {
+    background-color: #e5edff;
+}
+
+:host(.news_selected) {
+    background-color: #75ef89;
+}
+
+.news__title-ru {
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.news__title-en {
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.news__image {
+    width: 80px;
+    float: left;
+    margin-right: 5px;
+}
+
+.news__additional {
+    margin-top: 10px;
+    color: #9b9b9b;
+}
+
+.news__add {
+    float: right;
+}

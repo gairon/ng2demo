@@ -1,0 +1,14 @@
+:host {
+    display: block;
+}
+
+.category-list__item {
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #eeeeee;
+    cursor: pointer;
+}
+
+.category-list__item:hover {
+    background-color: #EEE;
+}

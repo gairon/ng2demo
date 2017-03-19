@@ -1,45 +1,58 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { VideoService } from './components/video/services/video.service';
+import { VideoCommonInfo } from './components/base/models/video-common-info.model';
+import { News } from './components/base/models/news.model';
 
-import { News } from './components/video/model/news.model';
-import { VideoShortDescr } from './components/video/model/video-short-descr.model';
+import { PortalService } from './components/base/services/portal.service';
+import { Category } from './components/base/models/category.model';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'NG2 Demo App is working!';
-  subTitle = 'this app is very simple!';
+    title = 'NG2 Demo App is working!';
+    subTitle = 'this app is very simple!';
 
-  footer = 'Created at 2017.';
+    footer = 'Created at 2017.';
 
-  listVisible: boolean = true;
+    rightSideBarVisible: boolean = true;
 
-  newsList: Array<News>;
-  videoShortDescrList: Array<VideoShortDescr>;
+    newsList: News[];
+    commonCategories: Category[];
+    videosList: VideoCommonInfo[];
 
-  constructor(
-    public videoService: VideoService
-  ) {
-  }
+    constructor(
+        public portalService: PortalService
+    ) {
+    }
 
-  ngOnInit() {
-    this.newsList = this.videoService.getNews();
-    this.videoShortDescrList = this.videoService.getVideoShortDescrList();
-  }
+    ngOnInit() {
+        this.portalService.getNews().then(news => this.newsList = news);
 
-  onToggleClick() {
-    this.listVisible = !this.listVisible;
-  }
+        this.portalService.getCommonCategories()
+            .then(categories => this.commonCategories = categories);
+    }
 
-  onNewsClick(news: News) {
-    alert(`Should be redirection onto ${news.titleRu}`);
-  }
+    onToggleRightSidebarClick() {
+        this.rightSideBarVisible = !this.rightSideBarVisible;
+    }
 
-  onVideoClick(video: VideoShortDescr) {
-    alert(`Should be redirection onto ${video.titleRu}`);
-  }
+    onAddNewsClick(news: News) {
+
+    }
+
+    onSelectCategory(category: Category) {
+        this.videosList = null;
+        this.portalService.filterVideos(category.id)
+            .then(videosList => this.videosList = videosList);
+    }
+
+    onVideoRemoveClick(video: VideoCommonInfo) {
+        const index = this.videosList.indexOf(video);
+        if (index > -1) {
+            this.videosList.splice(index, 1);
+        }
+    }
 }

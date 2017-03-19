@@ -1,32 +1,51 @@
 <div class="app">
-  <header class="app__header">
-    <div class="app__title">{{ title }}</div>
-    <div class="app__sub-title">{{ subTitle }}</div>
-  </header>
-  <div class="app__content">
-    <div class="app__left-sidebar">
-      <news
-        *ngFor="let news of newsList"
-        [news]="news"
-        (click)="onNewsClick(news)"
-      >
-      </news>
-    </div>
+    <header class="app__header">
+        <div class="app__title">{{ title }}</div>
+        <div class="app__sub-title">{{ subTitle }}</div>
+        <input type="button" value="Toggle news {{ rightSideBarVisible ? '&gt;&gt;' : '&lt;&lt;' }}" (click)="onToggleRightSidebarClick()"/>
+    </header>
+    <div class="app__content">
+        <div class="app__left-sidebar">
+            <h1>Categories: </h1>
+            <categories-list
+                    [categories]="commonCategories"
+                    (selectCategory)="onSelectCategory($event)"
+            ></categories-list>
+        </div>
 
-    <div class="app__center-content">
-      <input type="button" value="Toggle list" (click)="onToggleClick()"/>
+        <div class="app__center-content">
+            <videos-list
+                    [videosList]="videosList"
+                    (removeVideoClick)="onVideoRemoveClick($event)"
+            ></videos-list>
 
-      <div *ngIf="listVisible">
-        <video-short-descr
-          *ngFor="let video of videoShortDescrList"
-          [video]="video"
-          (click)="onVideoClick(video)"
+            <!--<video-details-->
+                    <!--*ngIf="videoDetails"-->
+                    <!--[videoDetails]="videoDetails"-->
+                    <!--(removeVideoClick)="onVideoRemoveClick($event)"-->
+            <!--&gt;</video-details>-->
+            <!--<div *ngIf="rightSideBarVisible">-->
+                <!--<video-poster-->
+                        <!--*ngFor="let video of videoShortDescrList"-->
+                        <!--[video]="video"-->
+                        <!--(click)="onVideoClick(video)"-->
+                <!--&gt;-->
+                <!--</video-poster>-->
+            <!--</div>-->
+        </div>
+
+        <div
+                class="app__right-sidebar"
+                *ngIf="rightSideBarVisible"
         >
-        </video-short-descr>
-      </div>
+            <h1>Upates: </h1>
+            <news-list
+                    [newsList]="newsList"
+                    (addClick)="onAddNewsClick($event)"
+            ></news-list>
+        </div>
     </div>
-  </div>
 
-  <footer class="app__footer">{{ footer }}</footer>
+    <footer class="app__footer">{{ footer }}</footer>
 
 </div>

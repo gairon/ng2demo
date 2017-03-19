@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BaseModule } from '../base';
 
-import { VideoPosterComponent } from './video-poster';
-import { VideosListComponent } from './videos-list';
+import { NewsComponent } from './news';
+import { NewsListComponent } from './news-list/news-list.component';
 
 @NgModule({
     imports: [
@@ -11,15 +11,15 @@ import { VideosListComponent } from './videos-list';
         BaseModule
     ],
     declarations: [
-        VideoPosterComponent,
-        VideosListComponent
+        NewsComponent,
+        NewsListComponent
     ],
     providers: [
     ],
     exports: [
-        VideoPosterComponent,
-        VideosListComponent
+        NewsComponent,
+        NewsListComponent
     ]
 })
-export class VideoModule {
+export class NewsModule {
 }

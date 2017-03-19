@@ -1,0 +1,6 @@
+<img class="news__image" [src]="news.video_image_file"/>
+<button class="news__add" (click)="onAddClick($event)">+</button>
+<div *ngIf="news.date" class="news__date">{{ news.date }}</div>
+<h1 class="news__title-ru">{{ news.video_title_ru + (news.video_title_en ? ' / ' + news.video_title_en : '') }}</h1>
+<h2 class="news__title-en"></h2>
+<div *ngIf="news.title" class="news__additional">{{ news.title }}, {{ news.status }}</div>

@@ -1,0 +1,5 @@
+<video-poster
+        *ngFor="let video of videosList"
+        [video]="video"
+        (removeClick)="onVideoRemoveClick($event)"
+></video-poster>

@@ -1,62 +1,72 @@
 .app {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  align-content: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: stretch;
 
-  min-height: 100%;
-  height: 100%;
+    min-height: 100%;
+    height: 100%;
 }
 
 .app__header {
-  padding: 10px;
+    padding: 10px;
 
-  background-color: #e4faff;
+    background-color: #e4faff;
 }
 
 .app__title {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 .app__sub-title {
-  font-size: 12px;
-  text-align: right;
+    font-size: 12px;
+    text-align: right;
 }
 
 .app__header h1 {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 .app__content {
-  flex: auto 1 1;
+    flex: auto 1 1;
 
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  align-content: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    align-content: stretch;
 }
 
 .app__left-sidebar {
-  width: 400px;
-  border-right: 1px solid #e2e2e2;
+    width: 300px;
+    min-width: 300px;
+    border-right: 1px solid #e2e2e2;
+    overflow-y: auto;
+}
+
+.app__right-sidebar {
+    width: 300px;
+    min-width: 300px;
+    border-left: 1px solid #e2e2e2;
+    overflow-y: auto;
 }
 
 .app__center-content {
-  flex: auto 1 1;
+    flex: auto 1 1;
+    overflow-y: auto;
 }
 
 .app__footer {
-  font-size: 14px;
-  text-align: center;
-  padding: 4px;
-  border-top: 1px solid #e2e2e2;
+    font-size: 14px;
+    text-align: center;
+    padding: 4px;
+    border-top: 1px solid #e2e2e2;
 }
 
 .app__list {
-  list-style: decimal;
+    list-style: decimal;
 }
 
 .app__list li {
-  margin-left: 40px;
+    margin-left: 40px;
 }

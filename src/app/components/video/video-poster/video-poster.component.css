@@ -1,0 +1,40 @@
+:host {
+    border: 1px solid #CCC;
+    padding: 5px;
+    margin: 5px;
+    position: relative;
+    width: 200px;
+    height: 300px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.video-poster__image {
+    width: 200px;
+    height: 300px;
+}
+
+.video-poster__title {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    padding: 5px;
+    background-color: #CCCCCC;
+    opacity: 0.7;
+}
+
+:host(:hover .video-poster__title) {
+    opacity: 1;
+}
+
+.video-poster__remove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    visibility: hidden;
+}
+
+:host(:hover .video-poster__remove) {
+    visibility: visible;
+}

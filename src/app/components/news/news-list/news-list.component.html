@@ -1,0 +1,6 @@
+<news
+        *ngFor="let news of newsList"
+        [news]="news"
+        (click)="onNewsClick(news)"
+        (addClick)="onAddClick($event)"
+></news>
