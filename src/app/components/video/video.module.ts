@@ -4,6 +4,7 @@ import { BaseModule } from '../base';
 
 import { VideoPosterComponent } from './video-poster';
 import { VideosListComponent } from './videos-list';
+import { VideoDetailsComponent } from './video-details/video-details.component';
 
 @NgModule({
     imports: [
@@ -12,13 +13,15 @@ import { VideosListComponent } from './videos-list';
     ],
     declarations: [
         VideoPosterComponent,
-        VideosListComponent
+        VideosListComponent,
+        VideoDetailsComponent
     ],
     providers: [
     ],
     exports: [
         VideoPosterComponent,
-        VideosListComponent
+        VideosListComponent,
+        VideoDetailsComponent
     ]
 })
 export class VideoModule {

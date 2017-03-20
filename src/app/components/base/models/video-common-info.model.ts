@@ -6,7 +6,9 @@ export class VideoCommonInfo {
         public id: string,
         public title_ru: string,
         public title_en: string,
-        public image_file: string
+        public image_file: string,
+        public year: string,
+        public description: string
     ) {
 
     }

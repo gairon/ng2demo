@@ -12,7 +12,10 @@ import { VideoPosterComponent } from '../video-poster/video-poster.component';
 })
 export class VideosListComponent implements OnInit {
     @Input() videosList: Array<VideoCommonInfo>;
+    @Input() selectedVideo: VideoCommonInfo;
+
     @Output() removeVideoClick: EventEmitter<VideoCommonInfo> = new EventEmitter<VideoCommonInfo>();
+    @Output() selectVideoClick: EventEmitter<VideoCommonInfo> = new EventEmitter<VideoCommonInfo>();
 
     @ViewChildren(VideoPosterComponent) private videoPosters: VideoPosterComponent;
 
@@ -24,5 +27,14 @@ export class VideosListComponent implements OnInit {
 
     onVideoRemoveClick(video: VideoCommonInfo) {
         this.removeVideoClick.emit(video);
+
+        if (this.selectedVideo && this.selectedVideo.id === video.id) {
+            this.selectVideoClick.emit(null);
+        }
+    }
+
+    onVideoClick(video: VideoCommonInfo) {
+        this.selectedVideo = video;
+        this.selectVideoClick.emit(video);
     }
 }

@@ -12,3 +12,7 @@
 .category-list__item:hover {
     background-color: #EEE;
 }
+
+.category-list__item_selected {
+    background-color: #bebebe !important;
+}

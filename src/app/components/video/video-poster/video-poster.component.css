@@ -9,6 +9,10 @@
     cursor: pointer;
 }
 
+:host(.video-poster_selected) {
+    background-color: #0000ff !important;
+}
+
 .video-poster__image {
     width: 200px;
     height: 300px;

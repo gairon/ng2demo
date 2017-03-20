@@ -1,12 +1,16 @@
 <div class="app">
     <header class="app__header">
         <div class="app__title">{{ title }}</div>
-        <div class="app__sub-title">{{ subTitle }}</div>
-        <input type="button" value="Toggle news {{ rightSideBarVisible ? '&gt;&gt;' : '&lt;&lt;' }}" (click)="onToggleRightSidebarClick()"/>
+        <button (click)="onToggleRightSidebarClick()">Toggle news {{ rightSideBarVisible ? '&gt;&gt;' : '&lt;&lt;' }}</button>
     </header>
     <div class="app__content">
         <div class="app__left-sidebar">
-            <h1>Categories: </h1>
+            <div>
+                <button (click)="onTestDomAccess()" #sampleButton>test DOM</button>
+                <button (click)="onCategoriesResetClick()">reset selection</button>
+                <button (click)="onCategoriesLastClick()">select last</button>
+            </div>
+            <h1>Categories:</h1>
             <categories-list
                     [categories]="commonCategories"
                     (selectCategory)="onSelectCategory($event)"
@@ -17,21 +21,15 @@
             <videos-list
                     [videosList]="videosList"
                     (removeVideoClick)="onVideoRemoveClick($event)"
+                    (selectVideoClick)="onSelectVideoClick($event)"
             ></videos-list>
 
-            <!--<video-details-->
-                    <!--*ngIf="videoDetails"-->
-                    <!--[videoDetails]="videoDetails"-->
-                    <!--(removeVideoClick)="onVideoRemoveClick($event)"-->
-            <!--&gt;</video-details>-->
-            <!--<div *ngIf="rightSideBarVisible">-->
-                <!--<video-poster-->
-                        <!--*ngFor="let video of videoShortDescrList"-->
-                        <!--[video]="video"-->
-                        <!--(click)="onVideoClick(video)"-->
-                <!--&gt;-->
-                <!--</video-poster>-->
-            <!--</div>-->
+            <video-details
+                    *ngIf="selectedVideo"
+                    [video]="selectedVideo"
+                    (updateVideo)="onUpdateVideo($event)"
+            >
+            </video-details>
         </div>
 
         <div
@@ -41,7 +39,6 @@
             <h1>Upates: </h1>
             <news-list
                     [newsList]="newsList"
-                    (addClick)="onAddNewsClick($event)"
             ></news-list>
         </div>
     </div>

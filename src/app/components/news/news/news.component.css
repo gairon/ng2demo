@@ -27,14 +27,9 @@
     background-color: #75ef89;
 }
 
-.news__title-ru {
+.news__title {
     font-size: 16px;
     margin-bottom: 6px;
-}
-
-.news__title-en {
-    font-size: 12px;
-    margin-bottom: 4px;
 }
 
 .news__image {

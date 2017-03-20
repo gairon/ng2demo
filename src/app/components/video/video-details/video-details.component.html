@@ -1,0 +1,23 @@
+<img class="video-details__image" [src]="video.image_file" />
+
+<h1 class="video-details__title">
+    <span [hidden]="editMode">{{ video.title_ru + (video.title_en ? ' / ' + video.title_en : '') }}</span>
+    <span [hidden]="!editMode">
+        <input #titleRu type="text" [value]="video.title_ru" placeholder="Title RU" /> / <input #titleEn [value]="video.title_en" placeholder="Title EN"/>
+    </span>
+</h1>
+<div>
+    <b>Год: </b>
+    <span [hidden]="editMode">{{ video.year }}</span>
+    <span [hidden]="!editMode"><input #year [value]="video.year" placeholder="Year" /></span>
+</div>
+<div>
+    <b>Описание: </b>
+    <div>{{ video.description }}</div>
+</div>
+
+<div class="video-details__actions">
+    <button *ngIf="!editMode" (click)="onEditClick()">edit</button>
+    <button *ngIf="editMode" (click)="onUpdateClick(titleRu.value, titleEn.value, year.value)">save</button>
+    <button *ngIf="editMode" (click)="onCancelClick()">cancel</button>
+</div>

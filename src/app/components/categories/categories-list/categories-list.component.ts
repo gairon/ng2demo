@@ -10,6 +10,8 @@ export class CategoriesListComponent implements OnInit {
     @Input() categories: Array<Category>;
     @Output() selectCategory: EventEmitter<Category> = new EventEmitter<Category>();
 
+    selectedCategory: Category;
+
     constructor() {
     }
 
@@ -17,6 +19,7 @@ export class CategoriesListComponent implements OnInit {
     }
 
     onCategoryClick(category: Category) {
+        this.selectedCategory = category;
         this.selectCategory.emit(category);
     }
 }

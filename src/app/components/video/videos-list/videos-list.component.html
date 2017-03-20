@@ -1,5 +1,7 @@
 <video-poster
         *ngFor="let video of videosList"
         [video]="video"
+        [selected]="selectedVideo && video.id === selectedVideo.id"
         (removeClick)="onVideoRemoveClick($event)"
+        (click)="onVideoClick(video)"
 ></video-poster>

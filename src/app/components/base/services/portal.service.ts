@@ -41,7 +41,7 @@ export class PortalService {
             .catch(this.handleError);
     }
 
-    filterVideos(categoryId: number) {
+    filterVideos(categoryId: string) {
         const url = this.compileUrl(`filter-videos&category=${categoryId}`);
         return this.$http.get(url)
             .toPromise()

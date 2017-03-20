@@ -14,6 +14,15 @@
     background-color: #e4faff;
 }
 
+.app__header h1 {
+    padding: 0;
+    margin: 0;
+}
+
+.app__header button {
+    float: right;
+}
+
 .app__title {
     font-size: 16px;
 }
@@ -21,11 +30,6 @@
 .app__sub-title {
     font-size: 12px;
     text-align: right;
-}
-
-.app__header h1 {
-    padding: 0;
-    margin: 0;
 }
 
 .app__content {
@@ -52,8 +56,21 @@
 }
 
 .app__center-content {
-    flex: auto 1 1;
-    overflow-y: auto;
+    flex: 1 1 auto;
+    /*overflow-y: auto;*/
+    align-items: stretch;
+    align-content: stretch;
+    display: flex;
+    flex-direction: column;
+}
+
+.app__center-content videos-list {
+    flex: 1 1 auto;
+}
+
+.app__center-content video-details {
+    border-top: 2px solid #CCC;
+    flex: 1 1 auto;
 }
 
 .app__footer {

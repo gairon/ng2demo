@@ -1,4 +1,7 @@
 :host {
     display: flex;
     flex-flow: row wrap;
+    overflow-y: auto;
+    align-content: flex-start;
+    justify-content: center;
 }

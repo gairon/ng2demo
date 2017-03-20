@@ -1,0 +1,24 @@
+:host {
+    padding: 5px;
+    margin: 5px;
+    display: block;
+}
+
+.video-details__image {
+    float: left;
+    width: 200px;
+    height: 300px;
+    margin-right: 10px;
+}
+
+.video-details__actions {
+    text-align: right;
+}
+
+:host(:after) {
+    content: " "; /* Older browser do not support empty content */
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+}
