@@ -4,6 +4,7 @@ import {
 
 import { VideoCommonInfo } from '../../base/models/video-common-info.model';
 import { VideoPosterComponent } from '../video-poster/video-poster.component';
+import { UserService } from '../../base/services/user.service';
 
 @Component({
     selector: 'videos-list',
@@ -17,9 +18,14 @@ export class VideosListComponent implements OnInit {
     @Output() removeVideoClick: EventEmitter<VideoCommonInfo> = new EventEmitter<VideoCommonInfo>();
     @Output() selectVideoClick: EventEmitter<VideoCommonInfo> = new EventEmitter<VideoCommonInfo>();
 
+    @Output() addToFavoriteClick: EventEmitter<VideoCommonInfo> = new EventEmitter<VideoCommonInfo>();
+    @Output() removeFromFavoriteClick: EventEmitter<VideoCommonInfo> = new EventEmitter<VideoCommonInfo>();
+
     @ViewChildren(VideoPosterComponent) private videoPosters: VideoPosterComponent;
 
-    constructor() {
+    constructor(
+        public userService: UserService
+    ) {
     }
 
     ngOnInit() {
@@ -36,5 +42,13 @@ export class VideosListComponent implements OnInit {
     onVideoClick(video: VideoCommonInfo) {
         this.selectedVideo = video;
         this.selectVideoClick.emit(video);
+    }
+
+    onAddToFavoriteClick(video: VideoCommonInfo) {
+        this.addToFavoriteClick.emit(video);
+    }
+
+    onRemoveFromFavoriteClick(video: VideoCommonInfo) {
+        this.removeFromFavoriteClick.emit(video);
     }
 }

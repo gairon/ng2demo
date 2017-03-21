@@ -22,7 +22,7 @@ export class NewsListComponent implements OnInit {
     }
 
     onNewsClick(news: News) {
-        alert(`Should be redirection onto ${news.video_title_ru}`);
+        // alert(`Should be redirection onto ${news.video_title_ru}`);
     }
 
     onAddClick(news: News) {

@@ -4,4 +4,7 @@
         [selected]="selectedVideo && video.id === selectedVideo.id"
         (removeClick)="onVideoRemoveClick($event)"
         (click)="onVideoClick(video)"
+        (addToFavoriteClick)="onAddToFavoriteClick($event)"
+        (removeFromFavoriteClick)="onRemoveFromFavoriteClick($event)"
+        [favorite]="userService.isFavoriteVideo(video)"
 ></video-poster>

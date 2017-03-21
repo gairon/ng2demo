@@ -13,6 +13,8 @@ import { BaseModule } from './components/base';
 import { NewsModule } from './components/news';
 import { VideoModule } from './components/video';
 import { CategoriesModule } from './components/categories';
+
+import { UserService } from './components/base/services/user.service';
 import { PortalService } from './components/base/services/portal.service';
 
 @NgModule({
@@ -31,7 +33,8 @@ import { PortalService } from './components/base/services/portal.service';
         AppComponent
     ],
     providers: [
-        PortalService
+        PortalService,
+        UserService
     ],
     bootstrap: [AppComponent]
 })

@@ -11,12 +11,14 @@ export class VideoPosterComponent implements OnInit, OnChanges {
 
     @Input() selected: boolean;
     @HostBinding('class.video-poster_selected') isSelected: boolean;
+    @Input() @HostBinding('class.video-poster_favorite') favorite: boolean;
 
     // FIXIT short way to change selected class!
     // @Input() @HostBinding('class.video-poster_selected') selected: boolean;
 
     @Output() removeClick: EventEmitter<VideoCommonInfo> = new EventEmitter<VideoCommonInfo>();
-
+    @Output() addToFavoriteClick: EventEmitter<VideoCommonInfo> = new EventEmitter<VideoCommonInfo>();
+    @Output() removeFromFavoriteClick: EventEmitter<VideoCommonInfo> = new EventEmitter<VideoCommonInfo>();
 
     constructor() {
     }
@@ -33,7 +35,17 @@ export class VideoPosterComponent implements OnInit, OnChanges {
         }
     }
 
-    onRemoveClick() {
+    onRemoveClick($event) {
         this.removeClick.emit(this.video);
+    }
+
+    onAddToFavoriteClick($event) {
+        this.addToFavoriteClick.emit(this.video);
+        $event.stopPropagation();
+    }
+
+    onRemoveFromFavoriteClick($event) {
+        this.removeFromFavoriteClick.emit(this.video);
+        $event.stopPropagation();
     }
 }

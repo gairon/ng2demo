@@ -1,6 +1,6 @@
 <div class="app">
     <header class="app__header">
-        <div class="app__title">{{ title }}</div>
+        <div class="app__title">{{ strings.TITLE }}</div>
         <button (click)="onToggleRightSidebarClick()">Toggle news {{ rightSideBarVisible ? '&gt;&gt;' : '&lt;&lt;' }}</button>
     </header>
     <div class="app__content">
@@ -10,7 +10,7 @@
                 <button (click)="onCategoriesResetClick()">reset selection</button>
                 <button (click)="onCategoriesLastClick()">select last</button>
             </div>
-            <h1>Categories:</h1>
+            <h1 fontChanger="30">Categories:</h1>
             <categories-list
                     [categories]="commonCategories"
                     (selectCategory)="onSelectCategory($event)"
@@ -22,6 +22,8 @@
                     [videosList]="videosList"
                     (removeVideoClick)="onVideoRemoveClick($event)"
                     (selectVideoClick)="onSelectVideoClick($event)"
+                    (addToFavoriteClick)="onAddToFavoriteClick($event)"
+                    (removeFromFavoriteClick)="onRemoveFromFavoriteClick($event)"
             ></videos-list>
 
             <video-details
@@ -36,13 +38,13 @@
                 class="app__right-sidebar"
                 *ngIf="rightSideBarVisible"
         >
-            <h1>Upates: </h1>
+            <h1 fontChanger="50">Upates: </h1>
             <news-list
                     [newsList]="newsList"
             ></news-list>
         </div>
     </div>
 
-    <footer class="app__footer">{{ footer }}</footer>
+    <footer class="app__footer">{{ strings.VERSION }}</footer>
 
 </div>

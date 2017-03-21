@@ -1,14 +1,13 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 
 import { VideoCommonInfo } from './components/base/models/video-common-info.model';
 import { News } from './components/base/models/news.model';
 
 import { PortalService } from './components/base/services/portal.service';
+import { UserService } from './components/base/services/user.service';
 import { Category } from './components/base/models/category.model';
-import { CategoriesListComponent } from "./components/categories/categories-list/categories-list.component";
-import { VideosListComponent } from "./components/video/videos-list/videos-list.component";
-import { until } from "selenium-webdriver";
-import titleIs = until.titleIs;
+import { CategoriesListComponent } from './components/categories/categories-list/categories-list.component';
+import { STRINGS } from './components/base/services/strings.service';
 
 @Component({
     selector: 'app-root',
@@ -16,10 +15,6 @@ import titleIs = until.titleIs;
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    title = 'NG2 Demo App is working!';
-
-    footer = 'Created at 2017.';
-
     rightSideBarVisible: boolean = true;
 
     newsList: News[];
@@ -32,7 +27,9 @@ export class AppComponent implements OnInit {
     @ViewChild('sampleButton') private buttonNode: ElementRef;
 
     constructor(
-        public portalService: PortalService
+        private portalService: PortalService,
+        public userService: UserService,
+        @Inject(STRINGS) private strings: { string }
     ) {
     }
 
@@ -91,5 +88,13 @@ export class AppComponent implements OnInit {
         this.selectedVideo.title_ru = titleRu;
         this.selectedVideo.title_en = titleEn;
         this.selectedVideo.year = year;
+    }
+
+    onAddToFavoriteClick(video: VideoCommonInfo) {
+        this.userService.addToFavorite(video);
+    }
+
+    onRemoveFromFavoriteClick(video: VideoCommonInfo) {
+        this.userService.removeFromFavorite(video);
     }
 }

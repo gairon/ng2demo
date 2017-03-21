@@ -1,3 +1,19 @@
 <img class="video-poster__image" [src]="video.image_file" />
 <h1 class="video-poster__title">{{ video.title_ru + (video.title_en ? ' / ' + video.title_en : '') }}</h1>
-<button class="video-poster__remove" (click)="onRemoveClick()">X</button>
+<button
+        title="Remove"
+        class="video-poster__remove"
+        (click)="onRemoveClick($event)"
+>X</button>
+<button
+        *ngIf="!favorite"
+        title="Favorite"
+        class="video-poster__favorite"
+        (click)="onAddToFavoriteClick($event)"
+>*</button>
+<button
+        *ngIf="favorite"
+        title="UnFavorite"
+        class="video-poster__favorite"
+        (click)="onRemoveFromFavoriteClick($event)"
+>*</button>
