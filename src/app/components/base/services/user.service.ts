@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { FavoriteVideo } from '../models/favorite-video.model';
 import { VideoCommonInfo } from '../models/video-common-info.model';
-import { WINDOW } from './window.service';
+import { WINDOW_SERVICE_TOKEN } from './window.service';
 
 const LS_FAVORITE_VIDEOS_KEY = 'favorite_videos';
 
@@ -10,7 +10,7 @@ export class UserService {
     private localStorage: Storage;
     private favoriteVideos: FavoriteVideo[] = [];
 
-    constructor(@Inject(WINDOW) window: Window) {
+    constructor(@Inject(WINDOW_SERVICE_TOKEN) window: Window) {
         this.localStorage = window.localStorage;
 
         this.initFavoriteVideos();

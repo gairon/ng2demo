@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, OpaqueToken, Optional, SkipSelf, ViewChild } from '@angular/core';
 
 import { VideoCommonInfo } from './components/base/models/video-common-info.model';
 import { News } from './components/base/models/news.model';
@@ -7,12 +7,20 @@ import { PortalService } from './components/base/services/portal.service';
 import { UserService } from './components/base/services/user.service';
 import { Category } from './components/base/models/category.model';
 import { CategoriesListComponent } from './components/categories/categories-list/categories-list.component';
-import { STRINGS } from './components/base/services/strings.service';
+import { STRINGS_SERVICE_TOKEN } from './components/base/services/strings.service';
+import { RAVE_GEN_SERVICE_SHARED_TOKEN, RaveGenerator } from './components/base/services/rave-gen.factory';
+
+const RAVE_GEN_SERVICE_TOKEN1: OpaqueToken = new OpaqueToken('RaveServiceGen1');
+const RAVE_GEN_SERVICE_TOKEN2: OpaqueToken = new OpaqueToken('RaveServiceGen2');
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css'],
+    providers: [
+        { provide: RAVE_GEN_SERVICE_TOKEN1, useFactory: RaveGenerator(20) },
+        { provide: RAVE_GEN_SERVICE_SHARED_TOKEN, useFactory: RaveGenerator(20) }
+    ]
 })
 export class AppComponent implements OnInit {
     rightSideBarVisible: boolean = true;
@@ -29,7 +37,9 @@ export class AppComponent implements OnInit {
     constructor(
         private portalService: PortalService,
         public userService: UserService,
-        @Inject(STRINGS) private strings: { string }
+        @Inject(STRINGS_SERVICE_TOKEN) public strings: { string },
+        @Inject(RAVE_GEN_SERVICE_TOKEN1) public raveStr: string,
+        @Optional() @Inject(RAVE_GEN_SERVICE_TOKEN2) public raveStr2: string
     ) {
     }
 

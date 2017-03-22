@@ -1,10 +1,9 @@
 import { OpaqueToken, Provider } from '@angular/core';
 
-export const WINDOW: OpaqueToken = new OpaqueToken('WindowToken');
-
-const win = (function _window(): any {
-    console.log(window);
+export function getWindow(): Window {
     return window;
-})();
+}
 
-export const WINDOW_PROVIDER = { provide: WINDOW, useValue: win };
+export const WINDOW_SERVICE_TOKEN: OpaqueToken = new OpaqueToken('WindowToken');
+
+export const WINDOW_PROVIDER = { provide: WINDOW_SERVICE_TOKEN, useValue: getWindow() };

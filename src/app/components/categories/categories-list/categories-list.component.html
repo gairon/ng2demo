@@ -6,3 +6,7 @@
           [ngClass]="{ 'category-list__item_selected': selectedCategory && (category.id === selectedCategory.id) }"
   >{{ category.title_ru }} (<span title="Subcategories count">{{ category.subcategory_count }}</span> / <span title="Videos count">{{ category.video_count }}</span>)</li>
 </ul>
+
+
+<div>Parent rave: {{ parentRaveStr }}</div>
+<div>Own short rave: {{ ownRaveStr }}</div>

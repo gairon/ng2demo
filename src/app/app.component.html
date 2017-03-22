@@ -1,6 +1,8 @@
 <div class="app">
     <header class="app__header">
         <div class="app__title">{{ strings.TITLE }}</div>
+        <div>Rave: {{ raveStr }}</div>
+        <div>Rave2: {{ rave2 || 'Rave2 Str not defined!' }}</div>
         <button (click)="onToggleRightSidebarClick()">Toggle news {{ rightSideBarVisible ? '&gt;&gt;' : '&lt;&lt;' }}</button>
     </header>
     <div class="app__content">

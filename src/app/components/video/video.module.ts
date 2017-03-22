@@ -19,7 +19,6 @@ import { VideoDetailsComponent } from './video-details/video-details.component';
     providers: [
     ],
     exports: [
-        VideoPosterComponent,
         VideosListComponent,
         VideoDetailsComponent
     ]

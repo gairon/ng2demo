@@ -17,7 +17,6 @@ import { NewsListComponent } from './news-list/news-list.component';
     providers: [
     ],
     exports: [
-        NewsComponent,
         NewsListComponent
     ]
 })
