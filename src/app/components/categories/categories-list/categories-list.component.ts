@@ -5,10 +5,7 @@ import { RAVE_GEN_SERVICE_SHARED_TOKEN, RaveGenerator } from '../../base/service
 @Component({
     selector: 'categories-list',
     templateUrl: './categories-list.component.html',
-    styleUrls: ['./categories-list.component.css'],
-    providers: [
-        { provide: RAVE_GEN_SERVICE_SHARED_TOKEN, useFactory: RaveGenerator(2) }
-    ]
+    styleUrls: ['./categories-list.component.css']
 })
 export class CategoriesListComponent {
     @Input() categories: Array<Category>;
@@ -17,9 +14,6 @@ export class CategoriesListComponent {
     selectedCategory: Category;
 
     constructor(
-        // show that used parent generator instead elf one
-        @SkipSelf() @Optional() @Inject(RAVE_GEN_SERVICE_SHARED_TOKEN) public parentRaveStr: string,
-        @Optional() @Inject(RAVE_GEN_SERVICE_SHARED_TOKEN) public ownRaveStr: string
     ) {
     }
 

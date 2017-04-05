@@ -1,18 +1,11 @@
 <div class="app">
     <header class="app__header">
-        <div class="app__title">{{ strings.TITLE }}</div>
-        <div>Rave: {{ raveStr }}</div>
-        <div>Rave2: {{ rave2 || 'Rave2 Str not defined!' }}</div>
+        <div class="app__title">{{ strings.TITLE }} ({{ httpPromiseMode ? 'PROMIS MODE' : 'OBSERVABLE MODE' }})</div>
         <button (click)="onToggleRightSidebarClick()">Toggle news {{ rightSideBarVisible ? '&gt;&gt;' : '&lt;&lt;' }}</button>
     </header>
     <div class="app__content">
         <div class="app__left-sidebar">
-            <div>
-                <button (click)="onTestDomAccess()" #sampleButton>test DOM</button>
-                <button (click)="onCategoriesResetClick()">reset selection</button>
-                <button (click)="onCategoriesLastClick()">select last</button>
-            </div>
-            <h1 fontChanger="30">Categories:</h1>
+            <h1>Categories:</h1>
             <categories-list
                     [categories]="commonCategories"
                     (selectCategory)="onSelectCategory($event)"
@@ -40,7 +33,7 @@
                 class="app__right-sidebar"
                 *ngIf="rightSideBarVisible"
         >
-            <h1 fontChanger="50">Upates: </h1>
+            <h1>Upates: </h1>
             <news-list
                     [newsList]="newsList"
             ></news-list>

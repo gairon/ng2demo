@@ -1,0 +1,11 @@
+>> 1. –еализуйте бекэнд дл€ ¬ашего проекта, использу€ json-server
+использован готовый бэк от другого проекта
+
+>> 2. —оздайте сервис дл€ работы с Http
+файл src/app/components/base/services/portal.service.ts, сервис PortalService
+
+>> 3. –еализуйте часть методов по схеме Promise, а часть по схеме Observable.
+файл src/app/app.component.ts
+переключатель режима работы с HTTP:
+httpPromiseMode, true - запросы обрабатываютс€ через Promise, false - с помощью Observable
+методы c запросами ngOnInit, onSelectCategory, метод очистки слушателей ngOnDestroy

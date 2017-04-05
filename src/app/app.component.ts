@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, OpaqueToken, Optional, SkipSelf, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, OpaqueToken, ViewChild } from '@angular/core';
 
 import { VideoCommonInfo } from './components/base/models/video-common-info.model';
 import { News } from './components/base/models/news.model';
@@ -8,21 +8,14 @@ import { UserService } from './components/base/services/user.service';
 import { Category } from './components/base/models/category.model';
 import { CategoriesListComponent } from './components/categories/categories-list/categories-list.component';
 import { STRINGS_SERVICE_TOKEN } from './components/base/services/strings.service';
-import { RAVE_GEN_SERVICE_SHARED_TOKEN, RaveGenerator } from './components/base/services/rave-gen.factory';
-
-const RAVE_GEN_SERVICE_TOKEN1: OpaqueToken = new OpaqueToken('RaveServiceGen1');
-const RAVE_GEN_SERVICE_TOKEN2: OpaqueToken = new OpaqueToken('RaveServiceGen2');
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    providers: [
-        { provide: RAVE_GEN_SERVICE_TOKEN1, useFactory: RaveGenerator(20) },
-        { provide: RAVE_GEN_SERVICE_SHARED_TOKEN, useFactory: RaveGenerator(20) }
-    ]
+    styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
     rightSideBarVisible: boolean = true;
 
     newsList: News[];
@@ -31,23 +24,44 @@ export class AppComponent implements OnInit {
     videosList: VideoCommonInfo[];
     selectedVideo: VideoCommonInfo;
 
+    // Promise / Observable mode
+    httpPromiseMode = false;
+    //
+
+    private _subscriptions: Subscription[] = [];
+
     @ViewChild(CategoriesListComponent) private categoriesListComponent: CategoriesListComponent;
-    @ViewChild('sampleButton') private buttonNode: ElementRef;
 
     constructor(
         private portalService: PortalService,
         public userService: UserService,
-        @Inject(STRINGS_SERVICE_TOKEN) public strings: { string },
-        @Inject(RAVE_GEN_SERVICE_TOKEN1) public raveStr: string,
-        @Optional() @Inject(RAVE_GEN_SERVICE_TOKEN2) public raveStr2: string
+        @Inject(STRINGS_SERVICE_TOKEN) public strings: { string }
     ) {
     }
 
     ngOnInit() {
-        this.portalService.getNews().then(news => this.newsList = news);
+        // Promise mode
+        if (this.httpPromiseMode) {
+            this.portalService.getNews()
+                .then(news => this.newsList = news);
 
-        this.portalService.getCommonCategories()
-            .then(categories => this.commonCategories = categories);
+            this.portalService.getCommonCategories()
+                .then(categories => this.commonCategories = categories);
+        } else {
+            let sub = this.portalService.getNewsObs()
+                .subscribe((news: News[]) => this.newsList = news);
+            this._subscriptions.push(sub);
+
+            sub = this.portalService.getCommonCategoriesObs()
+                .subscribe((categories: Category[]) => this.commonCategories = categories);
+            this._subscriptions.push(sub);
+        }
+    }
+
+    ngOnDestroy(): void {
+        if (!this.httpPromiseMode) {
+            this._subscriptions.forEach(sub => sub.unsubscribe());
+        }
     }
 
     onToggleRightSidebarClick() {
@@ -60,8 +74,14 @@ export class AppComponent implements OnInit {
         this.selectedVideo = null;
 
         if (category) {
-            this.portalService.filterVideos(category.id)
-                .then(videosList => this.videosList = videosList);
+            if (this.httpPromiseMode) {
+                this.portalService.filterVideos(category.id)
+                    .then(videosList => this.videosList = videosList);
+            } else {
+                const sub = this.portalService.filterVideosObs(category.id)
+                    .subscribe((videosList: VideoCommonInfo[]) => this.videosList = videosList);
+                this._subscriptions.push(sub);
+            }
         }
     }
 
@@ -87,11 +107,6 @@ export class AppComponent implements OnInit {
         if (lastCategory) {
             this.categoriesListComponent.onCategoryClick(lastCategory);
         }
-    }
-
-    onTestDomAccess() {
-        // access to Node properties
-        this.buttonNode.nativeElement.style.backgroundColor = 'lime';
     }
 
     onUpdateVideo({ titleRu, titleEn, year }) {
