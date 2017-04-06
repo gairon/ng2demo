@@ -45,7 +45,7 @@ export class PortalService {
         const url = this.compileUrl(`filter-videos&category=${categoryId}`);
         return this.$http.get(url)
             .toPromise()
-            .then(response => response.json().data as VideoCommonInfo[])
+            .then(response => this.instantiateVideoCommonInfo(response.json().data))
             .catch(this.handleError);
     }
 
@@ -67,7 +67,28 @@ export class PortalService {
         const url = this.compileUrl(`filter-videos&category=${categoryId}`);
         return this.$http.get(url)
             .map((response: Response) => this.extractDataObsArr<VideoCommonInfo>(response))
+            .map(data => this.instantiateVideoCommonInfo(data))
             .catch(this.handleErrorObs);
+    }
+
+    private instantiateVideoCommonInfo(data: VideoCommonInfo[]): VideoCommonInfo[] {
+        const result: VideoCommonInfo[] = [];
+        for (const item of data) {
+            result.push(new VideoCommonInfo(
+                item.id,
+                item.title_ru,
+                item.title_en,
+                item.image_file,
+                item.year,
+                item.description,
+                item.hd_rating,
+                item.hd_votes,
+                item.imdb_rating,
+                item.imdb_votes,
+                item.created
+            ));
+        }
+        return result;
     }
 
     private handleError(error: any): Promise<any> {

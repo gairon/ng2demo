@@ -1,17 +1,33 @@
 <img class="video-details__image" [src]="video.image_file" />
 
 <h1 class="video-details__title">
-    <span [hidden]="editMode">{{ video.title_ru + (video.title_en ? ' / ' + video.title_en : '') }}</span>
+    <span [hidden]="editMode">{{ video | multilang }}</span>
     <span [hidden]="!editMode">
         <input #titleRu type="text" [value]="video.title_ru" placeholder="Title RU" /> / <input #titleEn [value]="video.title_en" placeholder="Title EN"/>
     </span>
 </h1>
-<div>
+<div class="video-details__property">
     <b>Год: </b>
     <span [hidden]="editMode">{{ video.year }}</span>
     <span [hidden]="!editMode"><input #year [value]="video.year" placeholder="Year" /></span>
 </div>
-<div>
+<div class="video-details__property">
+    <b>Рейтинг HDSerials.TV: </b>
+    <span>{{ video.hd_rating | number }} ({{ video.hd_votes | number }}) {{ video.hd_rating | stars }}</span>
+</div>
+<div class="video-details__property" *ngIf="video.imdb_rating">
+    <b>Рейтинг IMDB: </b>
+    <span>{{ video.imdb_rating | number }} ({{ video.imdb_votes | number }}) {{ video.imdb_rating | stars }}</span>
+</div>
+<div class="video-details__property">
+    <b>Дата добавления: </b>
+    <span>{{ video.created | date:'longDate' }}</span>
+</div>
+<div class="video-details__property">
+    <b>Стоимость проката на неделю: </b>
+    <span>{{ video.cost | currency:'RUB':true:'1.2-2' }}</span>
+</div>
+<div class="video-details__property">
     <b>Описание: </b>
     <div>{{ video.description }}</div>
 </div>

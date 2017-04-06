@@ -1,7 +1,12 @@
+import {IMultiLangTitles} from './imulti-lang-titles';
+
 /**
  * News model
  */
-export class News {
+export class News implements IMultiLangTitles {
+    title_ru: string;
+    title_en: string;
+
     constructor(
         public video_id: string,
         public date: string,
@@ -12,5 +17,7 @@ export class News {
         public video_title_en: string,
         public video_title_ru: string
     ) {
+        this.title_ru = video_title_ru;
+        this.title_en = video_title_en;
     }
 }

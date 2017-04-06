@@ -1,7 +1,9 @@
+import {IMultiLangTitles} from './imulti-lang-titles';
+
 /**
  * Video common info model
  */
-export class FavoriteVideo {
+export class FavoriteVideo implements IMultiLangTitles {
     constructor(
         public id: string,
         public title_ru: string,

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
@@ -34,7 +34,10 @@ import { PortalService } from './components/base/services/portal.service';
     ],
     providers: [
         PortalService,
-        UserService
+        UserService, {
+            provide: LOCALE_ID,
+            useValue: 'ru-RU'
+        }
     ],
     bootstrap: [AppComponent]
 })

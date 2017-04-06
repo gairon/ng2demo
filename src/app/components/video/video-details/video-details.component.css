@@ -15,6 +15,20 @@
     text-align: right;
 }
 
+.video-details__title {
+    padding: 4px 0;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.video-details__property {
+    padding: 2px 0px 4px 0px;
+}
+
+.video-details__property b {
+    font-weight: bold;
+}
+
 :host(:after) {
     content: " "; /* Older browser do not support empty content */
     visibility: hidden;

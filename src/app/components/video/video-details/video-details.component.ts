@@ -1,10 +1,13 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { VideoCommonInfo } from '../../base/models/video-common-info.model';
+import { MultilangPipe } from '../../base/pipes/multilang.pipe';
+import { StarsPipe } from '../../base/pipes/stars.pipe';
 
 @Component({
     selector: 'video-details',
     templateUrl: 'video-details.component.html',
-    styleUrls: ['video-details.component.css']
+    styleUrls: ['video-details.component.css'],
+    providers: [ MultilangPipe, StarsPipe ]
 })
 export class VideoDetailsComponent implements OnChanges {
     @Input() video: VideoCommonInfo;

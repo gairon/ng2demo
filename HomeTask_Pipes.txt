@@ -1,3 +1,18 @@
 1. Применить один или более встроенных пайпов в Вашем приложении.
+файл src/app/components/video/video-details/video-details.component.html
+использованы CurrencyPipe, DatePipe, DecimalPipe в
+src/app/components/video/video-details/video-details.component.html
+src/app/components/categories/categories-list/categories-list.component.html
+
 2. Создать пользовательский пайп и применить его в Вашем приложении.
 3. Описать, что реализует пайп и где Вы их применили.
+src/app/components/base/pipes/multilang.pipe.ts
+Пайп собирает заголовок для видео из русского названия, и добавляет к нему через символ "/" английский вариант, если он есть.
+Использовано в
+src/app/components/video/video-details/video-details.component.html, при выводе заголовка
+src/app/components/video/video-poster/video-poster.component.html, при выводе заголовка
+
+src/app/components/base/pipes/stars.pipe.ts
+Пайп заменяет числовое представление звёздочками (*). Дробные числа округляются.
+src/app/components/video/video-details/video-details.component.html, как дополнение при выводе рейтингов
+

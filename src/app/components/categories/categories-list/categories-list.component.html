@@ -4,5 +4,5 @@
           *ngFor="let category of categories"
           (click)="onCategoryClick(category)"
           [ngClass]="{ 'category-list__item_selected': selectedCategory && (category.id === selectedCategory.id) }"
-  >{{ category.title_ru }} (<span title="Subcategories count">{{ category.subcategory_count }}</span> / <span title="Videos count">{{ category.video_count }}</span>)</li>
+  >{{ category.title_ru }} (<span title="Subcategories count">{{ category.subcategory_count }}</span> / <span title="Videos count">{{ category.video_count | number }}</span>)</li>
 </ul>

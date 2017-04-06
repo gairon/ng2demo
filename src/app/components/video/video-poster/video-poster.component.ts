@@ -1,10 +1,12 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter, HostBinding, SimpleChanges } from '@angular/core';
 import { VideoCommonInfo } from '../../base/models/video-common-info.model';
+import { MultilangPipe } from '../../base/pipes/multilang.pipe';
 
 @Component({
     selector: 'video-poster',
     templateUrl: 'video-poster.component.html',
-    styleUrls: ['video-poster.component.css']
+    styleUrls: ['video-poster.component.css'],
+    providers: [ MultilangPipe ]
 })
 export class VideoPosterComponent implements OnInit, OnChanges {
     @Input() video: VideoCommonInfo;
